@@ -1,0 +1,7 @@
+name: 'OpenTTD - Annotation check'
+description: 'Check if any previous job in a workflow has an annotation'
+author: 'OpenTTD'
+inputs: {}
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
