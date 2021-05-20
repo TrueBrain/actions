@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+    - master
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+
+jobs:
+  job1:
+    name: Job1
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: test
+      run: |
+        echo "::warning file=README.md,line=1,col=1::This is the title right?"
+
+  job2:
+    name: Job2
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: test
+      run: |
+        echo "::warning file=README.md,line=1,col=1::This is the title right?"
+
+  check_annotations:
+    name: Check Annotations
+    needs:
+    - job1
+
+    if: always() && github.event_name == 'pull_request'
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Check annotations
+      uses: TrueBrain/OpenTTD-actions/annotation-check@annotation-test
