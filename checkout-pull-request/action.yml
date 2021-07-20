@@ -10,6 +10,7 @@ runs:
       DEPTH=4
 
       git log --oneline
+      git merge-base HEAD^ HEAD^2
 
       while [ -z "$(git merge-base HEAD^ HEAD^2)" ]; do
         git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --deepen=${DEPTH} origin HEAD

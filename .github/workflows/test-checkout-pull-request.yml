@@ -16,6 +16,7 @@ jobs:
       uses: ./checkout-pull-request
     - name: Validate
       run: |
-        if [ "$(git log --oneline HEAD^..HEAD^2 | wc -l)" = "0"; then
+        git log --oneline HEAD^..HEAD^2
+        if [ "$(git log --oneline HEAD^..HEAD^2 | wc -l)" = "0" ]; then
           exit 1
         fi
