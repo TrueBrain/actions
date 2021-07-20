@@ -12,8 +12,6 @@ runs:
       git log --oneline
 
       while [ -z "$(git merge-base HEAD^ HEAD^2 2>/dev/null)" ]; do
-        git merge-base HEAD^ HEAD^2 || true
-
         git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --deepen=${DEPTH} origin HEAD
         DEPTH=$(expr ${DEPTH} \* 4)
 
@@ -22,5 +20,8 @@ runs:
           exit 1
         fi
       done
+
+      git merge-base HEAD^ HEAD^2 || true
+      git log --oneline
 
       echo "Found common parent for this merge commit"
